@@ -62,5 +62,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>bAmiは、撮影と写真保存のためにカメラロールの使用許可を求めます。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>bAmiは、撮影のためにカメラの使用許可を求めます。</string>
 </dict>
 </plist>

@@ -21,6 +21,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="photo" catalog="system"/>
+                                <connections>
+                                    <action selector="toAlbumButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ivb-xZ-yKq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-cJ-4dy">
                                 <rect key="frame" x="344" y="770" width="20" height="22"/>
@@ -32,10 +35,19 @@
                                 <rect key="frame" x="36" y="702" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
+                                <connections>
+                                    <action selector="changeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="9SW-Ed-PTm"/>
+                                </connections>
                             </slider>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
                                 <rect key="frame" x="38" y="86" width="339" height="563"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="PLu-hv-RNO" appends="YES" id="CLa-7g-dQ6"/>
+                                    <outletCollection property="gestureRecognizers" destination="vLm-X7-YKG" appends="YES" id="Onr-8P-1v5"/>
+                                    <outletCollection property="gestureRecognizers" destination="pt3-Y3-PsW" appends="YES" id="tgg-rJ-X1T"/>
+                                </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
                                 <rect key="frame" x="195" y="770" width="25" height="22"/>
@@ -52,9 +64,25 @@
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="7n4-FH-c1t" id="EzX-NK-SWh"/>
+                        <outlet property="imageView" destination="zHG-02-82g" id="sjx-lK-sHN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="PLu-hv-RNO">
+                    <connections>
+                        <action selector="drapping:" destination="BYZ-38-t0r" id="0Lc-em-06B"/>
+                    </connections>
+                </panGestureRecognizer>
+                <rotationGestureRecognizer id="vLm-X7-YKG">
+                    <connections>
+                        <action selector="rotateImageView:" destination="BYZ-38-t0r" id="z8o-0t-6sa"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <pinchGestureRecognizer id="pt3-Y3-PsW">
+                    <connections>
+                        <action selector="pinchAction:" destination="BYZ-38-t0r" id="Yp7-g6-3IG"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </scene>

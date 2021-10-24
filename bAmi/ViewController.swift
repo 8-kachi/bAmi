@@ -8,7 +8,8 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     //デバイスからの入力と出力を管理するオブジェクトの作成
     var captureSession = AVCaptureSession()
     //カメラデバイスそのものを管理するオブジェクトの作成
@@ -24,6 +25,11 @@ class ViewController: UIViewController {
     var cameraPreviewLayer : AVCaptureVideoPreviewLayer?
     
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    //画像の最後の回転角度
+    var lastRotation:CGFloat = 0.0
+    //画像の最後の大きさ
+    var prevPinch:CGFloat = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +45,68 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    @IBAction func toAlbumButton(_ sender: Any) {
+        //アルバムを開く処理を呼び出す
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    @IBAction func changeSlider(_ sender: UISlider) {
+        imageView.alpha = CGFloat(sender.value)
+    }
+    
+    //ビューをドラッグする
+    @IBAction func drapping(_ sender: UIPanGestureRecognizer) {
+        //指の座標を中心に合わせる
+        imageView.center = sender.location(in: self.view)
+    }
+    
+    //ビューを回転させる
+    @IBAction func rotateImageView(_ sender: UIRotationGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            //前回の角度から始める
+            sender.rotation = lastRotation
+        case .changed:
+            //回転角度にimageViewを合わせる
+            imageView.transform = CGAffineTransform(rotationAngle: sender.rotation)
+        case .ended:
+            //回転終了時の回転角度を保存する
+            lastRotation = sender.rotation
+        default:
+            break
+        }
+    }
+    
+    //ビューを拡大、縮小する
+    @IBAction func pinchAction(_ sender: UIPinchGestureRecognizer) {
+        let rate = sender.scale - 1 + prevPinch
+        //拡大縮小の反映
+        imageView.transform = CGAffineTransform(scaleX: rate , y: rate )
+        if(sender.state == .ended) {
+            //終了時に拡大、縮小率を保存しておき次回に使う
+            prevPinch = rate
+        }
+    }
+    
+    //画像が選択された時に呼ばれる
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            //imageViewにカメラロールから選んだ画像を表示する
+            imageView.image = selectedImage
+        }
+        //画像をImageViewに表示したらアルバムを閉じる
+        self.dismiss(animated: true)
+    }
+    
+    //画像選択がキャンセルされた時に呼ばれる
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //シャッターボタンが押された時のアクション
     @IBAction func cameraButton_TouchUpInside(_ sender: Any) {
         let settings = AVCapturePhotoSettings()
@@ -48,6 +116,16 @@ class ViewController: UIViewController {
         settings.isAutoStillImageStabilizationEnabled = true
         //撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as! AVCapturePhotoCaptureDelegate)
+        //コンテキスト開始
+        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
+        //viewを書き出す
+        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
+        // imageにコンテキストの内容を書き出す
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        //コンテキストを閉じる
+        UIGraphicsEndImageContext()
+        // imageをカメラロールに保存
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
 
@@ -64,7 +142,7 @@ extension ViewController: AVCapturePhotoCaptureDelegate{
     }
 }
 
-//MARK: カメラ設定メソッド
+//MARK:カメラ設定メソッド
 extension ViewController{
     // カメラの画質の設定
     func setupCaptureSession() {

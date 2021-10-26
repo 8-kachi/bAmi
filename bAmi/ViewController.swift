@@ -25,7 +25,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var cameraPreviewLayer : AVCaptureVideoPreviewLayer?
     
     @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            //最初の画像
+            imageView.image = UIImage(named: "guidanceGirl")
+        }
+    }
+    
     //画像の最後の回転角度
     var lastRotation:CGFloat = 0.0
     //画像の最後の大きさ
@@ -107,6 +113,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.dismiss(animated: true, completion: nil)
     }
     
+    //ゴミ箱ボタンが押された時のアクション
+    @IBAction func trashButton_TouchUpInside(_ sender: Any) {
+        // アラート表示
+        showAlert()
+    }
+    
+    // オーバーレイした画像を初期画像に戻す時に呼ばれる関数
+    func showAlert() {
+        let alert = UIAlertController(title: "確認",
+                                      message: "画像を削除してもいいですか?",
+                                      preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction) -> Void in
+            
+        })
+        let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        
+        // アラートにボタン追加
+        alert.addAction(okButton)
+        alert.addAction(cancelButton)
+        
+        // アラートの表示
+        present(alert, animated: true, completion: nil)
+    }
+    
     //シャッターボタンが押された時のアクション
     @IBAction func cameraButton_TouchUpInside(_ sender: Any) {
         let settings = AVCapturePhotoSettings()
@@ -115,17 +145,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //カメラの手ブレを補正
         settings.isAutoStillImageStabilizationEnabled = true
         //撮影された画像をdelegateメソッドで処理
-        self.photoOutput?.capturePhoto(with: settings, delegate: self as! AVCapturePhotoCaptureDelegate)
-        //コンテキスト開始
-        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
-        //viewを書き出す
-        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
-        // imageにコンテキストの内容を書き出す
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        //コンテキストを閉じる
-        UIGraphicsEndImageContext()
-        // imageをカメラロールに保存
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
     }
 }
 
@@ -197,3 +217,4 @@ extension ViewController{
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }
 }
+

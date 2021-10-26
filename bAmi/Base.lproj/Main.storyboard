@@ -16,32 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-6P-vfz">
-                                <rect key="frame" x="49" y="770" width="24" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-6P-vfz">
+                                <rect key="frame" x="40" y="820" width="24" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="photo" catalog="system"/>
                                 <connections>
                                     <action selector="toAlbumButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ivb-xZ-yKq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-cJ-4dy">
-                                <rect key="frame" x="344" y="770" width="20" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-cJ-4dy">
+                                <rect key="frame" x="354" y="820" width="20" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="trashButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffY-uL-OcA"/>
+                                </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nem-KI-Ipc">
-                                <rect key="frame" x="36" y="702" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <slider opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nem-KI-Ipc">
+                                <rect key="frame" x="38" y="720" width="338" height="31"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
                                     <action selector="changeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="9SW-Ed-PTm"/>
                                 </connections>
                             </slider>
-                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
-                                <rect key="frame" x="38" y="86" width="339" height="563"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
+                                <rect key="frame" x="5" y="49" width="404" height="601"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="PLu-hv-RNO" appends="YES" id="CLa-7g-dQ6"/>
@@ -49,9 +48,8 @@
                                     <outletCollection property="gestureRecognizers" destination="pt3-Y3-PsW" appends="YES" id="tgg-rJ-X1T"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
-                                <rect key="frame" x="195" y="770" width="25" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
+                                <rect key="frame" x="194.5" y="820" width="25" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="camera" catalog="system"/>
                                 <connections>
@@ -61,6 +59,21 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OUo-6P-vfz" secondAttribute="bottom" constant="20" id="Gcr-30-h2i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nem-KI-Ipc" secondAttribute="trailing" constant="40" id="NAo-aD-aeh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DXH-cJ-4dy" secondAttribute="bottom" constant="20" id="NKp-T5-0JU"/>
+                            <constraint firstItem="7n4-FH-c1t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OqQ-gV-tRr"/>
+                            <constraint firstItem="OUo-6P-vfz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Pmq-vM-rd2"/>
+                            <constraint firstItem="nem-KI-Ipc" firstAttribute="top" secondItem="zHG-02-82g" secondAttribute="bottom" constant="70" id="Tv1-75-zBT"/>
+                            <constraint firstItem="OUo-6P-vfz" firstAttribute="top" secondItem="nem-KI-Ipc" secondAttribute="bottom" constant="70" id="UG6-Ce-XRJ"/>
+                            <constraint firstItem="nem-KI-Ipc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Zed-Ng-TGP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7n4-FH-c1t" secondAttribute="bottom" constant="20" id="fsw-VJ-ptQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zHG-02-82g" secondAttribute="trailing" constant="5" id="n1j-BQ-adY"/>
+                            <constraint firstItem="zHG-02-82g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="wU9-6i-XzN"/>
+                            <constraint firstItem="zHG-02-82g" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="xcp-ha-Pmd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DXH-cJ-4dy" secondAttribute="trailing" constant="40" id="yEd-b8-59I"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="7n4-FH-c1t" id="EzX-NK-SWh"/>

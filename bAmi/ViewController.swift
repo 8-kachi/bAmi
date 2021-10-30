@@ -32,6 +32,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    
     //画像の最後の回転角度
     var lastRotation:CGFloat = 0.0
     //画像の最後の大きさ
@@ -146,6 +147,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         settings.isAutoStillImageStabilizationEnabled = true
         //撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
+        
+        //コンテキスト開始
+        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
+        //viewを書き出す
+        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
+        // imageにコンテキストの内容を書き出す
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        //コンテキストを閉じる
+        UIGraphicsEndImageContext()
+        // imageをカメラロールに保存
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
 

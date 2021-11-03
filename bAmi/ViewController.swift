@@ -202,8 +202,19 @@ extension ViewController: AVCapturePhotoCaptureDelegate{
         if let imageData = photo.fileDataRepresentation() {
             // Data型をUIImageオブジェクトに変換
             let uiImage = UIImage(data: imageData)
+            
+            UIGraphicsBeginImageContext(view.frame.size)
+            //背景をContextに描画
+            uiImage?.draw(in: CGRect(origin: CGPoint.zero, size: view.frame.size))
+            //合成する画像を位置を指定して描画
+            imageView.draw(CGRect(origin: CGPoint.zero, size: view.frame.size))
+            //context上に合成された画像を得る
+            let compositedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            
             // 写真ライブラリに画像を保存
-            UIImageWriteToSavedPhotosAlbum(uiImage!, nil,nil,nil)
+            UIImageWriteToSavedPhotosAlbum(compositedImage!, nil,nil,nil)
         }
     }
 }

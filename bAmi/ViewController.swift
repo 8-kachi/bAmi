@@ -8,7 +8,15 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension UISlider {
+    class changeSlider: UISlider {
+        override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+            return true // touchされた場所がスライダーの位置
+        }
+    }
+}
+
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     //デバイスからの入力と出力を管理するオブジェクトの作成
     var captureSession = AVCaptureSession()
@@ -31,12 +39,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = UIImage(named: "guidanceGirl")
         }
     }
+    @IBOutlet weak var changeSlider: UISlider!
     
     
-    //画像の最後の回転角度
-    var lastRotation:CGFloat = 0.0
-    //画像の最後の大きさ
-    var prevPinch:CGFloat = 1
+    @IBOutlet var rotationRecognizer: UIRotationGestureRecognizer!
+    @IBOutlet var pinchRecognizer: UIPinchGestureRecognizer!
+    
+    //ドラッグ終了時のアフィン変換
+    var prevEndPinch:CGAffineTransform = CGAffineTransform()
+    var prevEndRotate:CGAffineTransform = CGAffineTransform()
+    
+    //ドラッグ中の前回アフィン変換
+    var prevPinch:CGAffineTransform = CGAffineTransform()
+    var prevRotate:CGAffineTransform = CGAffineTransform()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +61,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         setupPreviewLayer()
         captureSession.startRunning()
         // Do any additional setup after loading the view.
+        
+        //panViewをパンジェスチャー（ドラッグ）で動かせるように
+        let panGesture = UIPanGestureRecognizer()
+        panGesture.addTarget(self, action: #selector(panAction(_:)))
+        imageView.addGestureRecognizer(panGesture)
+        //デリゲート先に自分を設定する。
+        rotationRecognizer.delegate = self
+        pinchRecognizer.delegate = self
+        //アフィン変換の初期値を設定する。
+        prevEndPinch = imageView.transform
+        prevEndRotate = imageView.transform
+        prevPinch = imageView.transform
+        prevRotate = imageView.transform
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,42 +89,60 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func changeSlider(_ sender: UISlider) {
+    
+    @IBAction func changeSlider(_ sender: UISlider, forEvent event: UIEvent) {
         imageView.alpha = CGFloat(sender.value)
     }
     
     //ビューをドラッグする
-    @IBAction func drapping(_ sender: UIPanGestureRecognizer) {
-        //指の座標を中心に合わせる
-        imageView.center = sender.location(in: self.view)
+    @IBAction func panAction(_ sender: UIPanGestureRecognizer) {
+        // Viewをドラッグした量だけ動かす
+        let point: CGPoint = sender.translation(in: self.imageView )
+        let movedPoint = CGPoint(x:self.imageView.center.x + point.x, y:self.imageView.center.y + point.y)
+        self.imageView.center = movedPoint
+        
+        // ドラッグで移動した距離をリセット
+        sender.setTranslation(CGPoint.zero, in: self.imageView)
+        
     }
     
     //ビューを回転させる
     @IBAction func rotateImageView(_ sender: UIRotationGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            //前回の角度から始める
-            sender.rotation = lastRotation
-        case .changed:
-            //回転角度にimageViewを合わせる
-            imageView.transform = CGAffineTransform(rotationAngle: sender.rotation)
-        case .ended:
-            //回転終了時の回転角度を保存する
-            lastRotation = sender.rotation
-        default:
-            break
+        //前回ドラッグ終了時の回転を引き継いだアフィン変換を行う。
+        let nowRotate = prevEndRotate.rotated(by: sender.rotation)
+        
+        //拡大縮小と回転のアフィン変換を合わせたものをラベルに登録する。
+        imageView.transform = prevPinch.concatenating(nowRotate)
+        
+        //今回の回転のアフィン変換をクラス変数に保存する。
+        prevRotate = nowRotate
+        
+        if(sender.state == UIGestureRecognizer.State.ended) {
+            //ドラッグ終了時の回転のアフィン変換をクラス変数に保存する。
+            prevEndRotate = nowRotate
         }
     }
     
     //ビューを拡大、縮小する
     @IBAction func pinchAction(_ sender: UIPinchGestureRecognizer) {
-        let rate = sender.scale - 1 + prevPinch
-        //拡大縮小の反映
-        imageView.transform = CGAffineTransform(scaleX: rate , y: rate )
-        if(sender.state == .ended) {
-            //終了時に拡大、縮小率を保存しておき次回に使う
-            prevPinch = rate
+        //前回ドラッグ終了時の拡大縮小を引き継いだアフィン変換を行う。
+        let nowPinch = prevEndPinch.scaledBy(x: sender.scale, y: sender.scale)
+        
+        //拡大縮小と回転のアフィン変換を合わせたものをラベルに登録する。
+        imageView.transform = prevRotate.concatenating(nowPinch)
+        
+        //今回の拡大縮小のアフィン変換をクラス変数に保存する。
+        prevPinch = nowPinch
+        
+        if(sender.state == UIGestureRecognizer.State.ended) {
+            //ドラッグ終了時の拡大終了のアフィン変換をクラス変数に保存する。
+            prevEndPinch = nowPinch
         }
+    }
+    
+    //リコグナイザーの同時検知を許可するメソッド
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     //画像が選択された時に呼ばれる
@@ -123,10 +169,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // オーバーレイした画像を初期画像に戻す時に呼ばれる関数
     func showAlert() {
         let alert = UIAlertController(title: "確認",
-                                      message: "画像を削除してもいいですか?",
+                                      message: "画像を基本状態に戻してもいいですか?",
                                       preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction) -> Void in
-            
+            //最初の画像
+            self.imageView.image = UIImage(named: "guidanceGirl")
         })
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
@@ -143,21 +190,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let settings = AVCapturePhotoSettings()
         //フラッシュの設定
         settings.flashMode = .auto
-        //カメラの手ブレを補正
-        settings.isAutoStillImageStabilizationEnabled = true
         //撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
-        
-        //コンテキスト開始
-        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
-        //viewを書き出す
-        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
-        // imageにコンテキストの内容を書き出す
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        //コンテキストを閉じる
-        UIGraphicsEndImageContext()
-        // imageをカメラロールに保存
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
 

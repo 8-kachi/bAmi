@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>bAmiは、撮影のためにカメラの使用許可を求めます。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>bAmiは、撮影と写真保存のためにカメラロールの使用許可を求めます。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -62,9 +66,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>bAmiは、撮影と写真保存のためにカメラロールの使用許可を求めます。</string>
-	<key>NSCameraUsageDescription</key>
-	<string>bAmiは、撮影のためにカメラの使用許可を求めます。</string>
 </dict>
 </plist>

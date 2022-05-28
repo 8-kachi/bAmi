@@ -384,12 +384,13 @@ extension ViewController{
     func setupPreviewLayer() {
         // 指定したAVCaptureSessionでプレビューレイヤを初期化
         self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
-        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
 
         self.cameraPreviewLayer?.frame = self.cameraView.frame
+        // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
+//        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
+        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }

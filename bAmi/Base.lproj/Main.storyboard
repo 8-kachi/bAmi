@@ -17,43 +17,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-rf-VV8">
-                                <rect key="frame" x="0.0" y="172" width="414" height="552"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-rf-VV8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                             <slider opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nem-KI-Ipc">
                                 <rect key="frame" x="38" y="84" width="338" height="31"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
                                     <action selector="changeSlider:forEvent:" destination="BYZ-38-t0r" eventType="valueChanged" id="9WE-hZ-bhs"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
-                                <rect key="frame" x="194.5" y="800" width="25" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="camera" catalog="system"/>
-                                <connections>
-                                    <action selector="cameraButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uFP-04-i6E"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-cJ-4dy">
-                                <rect key="frame" x="354" y="800" width="20" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="trash" catalog="system"/>
+                                <rect key="frame" x="120.5" y="800" width="24" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="rectangle.slash" catalog="system"/>
                                 <connections>
                                     <action selector="trashButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffY-uL-OcA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-6P-vfz">
-                                <rect key="frame" x="40" y="800" width="24" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="46.5" y="800" width="24" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="photo" catalog="system"/>
                                 <connections>
                                     <action selector="toAlbumButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ivb-xZ-yKq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bA-9u-03Y">
+                                <rect key="frame" x="269.5" y="800" width="18.5" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="checkmark" catalog="system"/>
+                                <connections>
+                                    <action selector="saveCameraView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oaC-Zo-1ye"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
+                                <rect key="frame" x="194.5" y="800" width="25" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="camera" catalog="system"/>
+                                <connections>
+                                    <action selector="cameraButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uFP-04-i6E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-ez-NHW">
+                                <rect key="frame" x="338" y="800" width="18" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="arrow.counterclockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="backGroundCansel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D7q-WV-8Em"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
-                                <rect key="frame" x="104" y="170" width="207" height="226"/>
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -66,24 +81,36 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DXH-cJ-4dy" secondAttribute="bottom" constant="40" id="6qz-7Q-bQv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7n4-FH-c1t" secondAttribute="bottom" constant="40" id="E8V-Lz-OCN"/>
-                            <constraint firstItem="nem-KI-Ipc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="EYT-Hp-1Vy"/>
-                            <constraint firstItem="7n4-FH-c1t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GMb-R8-SfE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DXH-cJ-4dy" secondAttribute="trailing" constant="40" id="MZB-lH-S01"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OUo-6P-vfz" secondAttribute="bottom" constant="40" id="Qje-1F-a2M"/>
-                            <constraint firstItem="nem-KI-Ipc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Qxe-zt-BOD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nem-KI-Ipc" secondAttribute="trailing" constant="40" id="TcF-tH-45m"/>
-                            <constraint firstItem="OUo-6P-vfz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="bOC-8U-sPF"/>
+                            <constraint firstItem="1bA-9u-03Y" firstAttribute="leading" secondItem="7n4-FH-c1t" secondAttribute="trailing" constant="50" id="1EE-U3-o5i"/>
+                            <constraint firstItem="qcP-rf-VV8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4Vs-1I-PCO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nem-KI-Ipc" secondAttribute="trailing" constant="40" id="8LF-Jd-mFj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DXH-cJ-4dy" secondAttribute="bottom" constant="40" id="9IJ-lL-YjI"/>
+                            <constraint firstItem="qcP-rf-VV8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="C7h-nZ-cGR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OUo-6P-vfz" secondAttribute="bottom" constant="40" id="JAI-6S-2m9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yEr-ez-NHW" secondAttribute="bottom" constant="40" id="Mgf-n3-Dx7"/>
+                            <constraint firstItem="qcP-rf-VV8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rhv-9b-Tgf"/>
+                            <constraint firstItem="7n4-FH-c1t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ymz-Pi-ImV"/>
+                            <constraint firstItem="nem-KI-Ipc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="aQh-d1-IlZ"/>
+                            <constraint firstItem="nem-KI-Ipc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="bJF-yB-qOL"/>
+                            <constraint firstItem="yEr-ez-NHW" firstAttribute="leading" secondItem="1bA-9u-03Y" secondAttribute="trailing" constant="50" id="fIU-v3-fNq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1bA-9u-03Y" secondAttribute="bottom" constant="40" id="hnx-KJ-QZj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7n4-FH-c1t" secondAttribute="bottom" constant="40" id="jxM-t1-LbU"/>
+                            <constraint firstItem="7n4-FH-c1t" firstAttribute="leading" secondItem="DXH-cJ-4dy" secondAttribute="trailing" constant="50" id="mEw-Db-BWC"/>
+                            <constraint firstItem="DXH-cJ-4dy" firstAttribute="leading" secondItem="OUo-6P-vfz" secondAttribute="trailing" constant="50" id="wig-HK-Bpa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qcP-rf-VV8" secondAttribute="bottom" id="zGQ-qs-ki2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backGroundCancelButton" destination="yEr-ez-NHW" id="c4O-Do-oqM"/>
                         <outlet property="cameraButton" destination="7n4-FH-c1t" id="EzX-NK-SWh"/>
                         <outlet property="cameraView" destination="qcP-rf-VV8" id="wRX-me-jcL"/>
                         <outlet property="changeSlider" destination="nem-KI-Ipc" id="0ze-vv-Dwn"/>
                         <outlet property="imageView" destination="zHG-02-82g" id="sjx-lK-sHN"/>
                         <outlet property="pinchRecognizer" destination="pt3-Y3-PsW" id="IRE-zq-tuz"/>
                         <outlet property="rotationRecognizer" destination="vLm-X7-YKG" id="ZOg-Bp-wi9"/>
+                        <outlet property="saveCameraViewButton" destination="1bA-9u-03Y" id="dTU-JQ-ME2"/>
+                        <outlet property="toAlbumButton" destination="OUo-6P-vfz" id="7sA-fH-8Ae"/>
+                        <outlet property="trashButton" destination="DXH-cJ-4dy" id="w86-Kr-kMG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -107,11 +134,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="camera" catalog="system" width="128" height="94"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="photo" catalog="system" width="128" height="93"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
+        <image name="rectangle.slash" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

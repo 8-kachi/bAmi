@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,7 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-rf-VV8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="172" width="414" height="552"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qcP-rf-VV8" secondAttribute="height" multiplier="3:4" id="du4-Vg-pvM"/>
+                                </constraints>
                             </imageView>
                             <slider opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nem-KI-Ipc">
                                 <rect key="frame" x="38" y="84" width="338" height="31"/>
@@ -83,9 +85,9 @@
                         <constraints>
                             <constraint firstItem="1bA-9u-03Y" firstAttribute="leading" secondItem="7n4-FH-c1t" secondAttribute="trailing" constant="50" id="1EE-U3-o5i"/>
                             <constraint firstItem="qcP-rf-VV8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4Vs-1I-PCO"/>
+                            <constraint firstItem="qcP-rf-VV8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7yJ-O4-mtf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nem-KI-Ipc" secondAttribute="trailing" constant="40" id="8LF-Jd-mFj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DXH-cJ-4dy" secondAttribute="bottom" constant="40" id="9IJ-lL-YjI"/>
-                            <constraint firstItem="qcP-rf-VV8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="C7h-nZ-cGR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OUo-6P-vfz" secondAttribute="bottom" constant="40" id="JAI-6S-2m9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yEr-ez-NHW" secondAttribute="bottom" constant="40" id="Mgf-n3-Dx7"/>
                             <constraint firstItem="qcP-rf-VV8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rhv-9b-Tgf"/>
@@ -96,8 +98,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1bA-9u-03Y" secondAttribute="bottom" constant="40" id="hnx-KJ-QZj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7n4-FH-c1t" secondAttribute="bottom" constant="40" id="jxM-t1-LbU"/>
                             <constraint firstItem="7n4-FH-c1t" firstAttribute="leading" secondItem="DXH-cJ-4dy" secondAttribute="trailing" constant="50" id="mEw-Db-BWC"/>
+                            <constraint firstItem="qcP-rf-VV8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qyP-go-5U0"/>
                             <constraint firstItem="DXH-cJ-4dy" firstAttribute="leading" secondItem="OUo-6P-vfz" secondAttribute="trailing" constant="50" id="wig-HK-Bpa"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qcP-rf-VV8" secondAttribute="bottom" id="zGQ-qs-ki2"/>
                         </constraints>
                     </view>
                     <connections>

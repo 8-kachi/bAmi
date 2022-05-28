@@ -18,7 +18,7 @@ extension UISlider {
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
-    //デバイスからの入力と出力を管理するオブジェクトの作成
+    /// AVキャプチャーセッションを生成
     var captureSession = AVCaptureSession()
     //カメラデバイスそのものを管理するオブジェクトの作成
     //メインカメラの管理オブジェクトの作成
@@ -110,9 +110,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func showbackGroundcancelAlert()  {
-        let alert = UIAlertController(title: "撮影した背景画像を削除します",
-                                      message: "撮影に戻ってもよいでしょうか",
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "撮影した背景画像を削除します",
+            message: "撮影に戻ってもよいでしょうか",
+            preferredStyle: .alert
+        )
         let okButton = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction) -> Void in
             //撮影した画像を削除
             self.cameraView.image = nil
@@ -129,7 +131,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.backGroundCancelButton.isHidden = true
             
         })
-        let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        let cancelButton = UIAlertAction(
+            title: "キャンセル",
+            style: .cancel,
+            handler: nil
+        )
         
         // アラートにボタン追加
         alert.addAction(okButton)
@@ -145,27 +151,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // 重ねる画像と背景を一緒に保存する時に呼ばれる関数
     func showSaveAlert() {
-        let alert = UIAlertController(title: "画像を保存します",
-                                      message: "この位置で保存してもよいでしょうか",
-                                      preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: { [self](action: UIAlertAction) -> Void in
-            if self.cameraView.image != nil {
+        let alert = UIAlertController(
+            title: "画像を保存します",
+            message: "この位置で保存してもよいでしょうか",
+            preferredStyle: .alert
+        )
+        let okButton = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: { [self](action: UIAlertAction) -> Void in
+                if self.cameraView.image != nil {
                 
-                toAlbumButton.isHidden = true
-                trashButton.isHidden = true
-                cameraButton.isHidden = true
-                saveCameraViewButton.isHidden = true
-                backGroundCancelButton.isHidden = true
-                changeSlider.isHidden = true
-                
-                UIGraphicsBeginImageContextWithOptions(
-                    CGSize(
-                        width: cameraView.frame.width,
-                        height: cameraView.frame.height
-                    ),
-                    false,
-                    0
-                )
+                    toAlbumButton.isHidden = true
+                    trashButton.isHidden = true
+                    cameraButton.isHidden = true
+                    saveCameraViewButton.isHidden = true
+                    backGroundCancelButton.isHidden = true
+                    changeSlider.isHidden = true
+                    
+                    UIGraphicsBeginImageContextWithOptions(
+                        CGSize(
+                            width: cameraView.frame.width,
+                            height: cameraView.frame.height
+                        ),
+                        false,
+                        0
+                    )
                 self.view.drawHierarchy(
                     in: CGRect(
                         x: -cameraView.frame.origin.x,
@@ -275,12 +286,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // オーバーレイした画像を初期画像に戻す時に呼ばれる関数
     func showAlert() {
-        let alert = UIAlertController(title: "重ねている画像を削除します",
-                                      message: "画像を基本状態に戻してもよいでしょうか",
-                                      preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction) -> Void in
-            //最初の画像
-            self.imageView.image = UIImage(named: "guidanceGirl")
+        let alert = UIAlertController(
+            title: "重ねている画像を削除します",
+            message: "画像を基本状態に戻してもよいでしょうか",
+            preferredStyle: .alert
+        )
+        let okButton = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: {(action: UIAlertAction) -> Void in
+                //最初の画像
+                self.imageView.image = UIImage(named: "guidanceGirl")
         })
         
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -318,49 +334,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 extension ViewController: AVCapturePhotoCaptureDelegate{
     // 撮影した画像データが生成されたときに呼び出されるデリゲートメソッド
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        //        if let imageData = photo.fileDataRepresentation() {
-        //            // Data型をUIImageオブジェクトに変換
-        //            let uiImage = UIImage(data: imageData)
-        //
-        //            UIGraphicsBeginImageContext(view.frame.size)
-        //            //背景をContextに描画
-        //            uiImage?.draw(in: CGRect(origin: CGPoint.zero, size: view.frame.size))
-        //            //合成する画像を位置を指定して描画
-        //            imageView.draw(CGRect(origin: CGPoint.zero, size: view.frame.size))
-        //            //context上に合成された画像を得る
-        //            let compositedImage = UIGraphicsGetImageFromCurrentImageContext()
-        //            UIGraphicsEndImageContext()
-        //
-        //
-        //            // 写真ライブラリに画像を保存
-        //            UIImageWriteToSavedPhotosAlbum(compositedImage!, nil,nil,nil)
-        //        }
-        
-        //        let cameraViewImage = imageWithView(cameraView: cameraView)
-        
         self.cameraView.image = UIImage(data: photo.fileDataRepresentation()!)
-        //        self.cameraView.image = cameraViewImage
-        //        print(self.cameraView.layer.presentation()!)
-        
-        //        //コンテキスト開始
-        //        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
-        //        //viewを書き出す
-        //        self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
-        
-        
-        
-        
-        //        UIImage(data: photo.fileDataRepresentation()!)?.draw(in: self.view.bounds)
-        //        self.cameraView.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
-        // imageにコンテキストの内容を書き出す
     }
-    
-    //    func imageWithView(cameraView: UIImageView) -> UIImage? {
-    //        UIGraphicsBeginImageContextWithOptions(cameraView.bounds.size, cameraView.isOpaque, 0.0)
-    //        defer { UIGraphicsEndImageContext() }
-    //        cameraView.layer.sublayers![0].drawHierarchy(in: cameraView.bounds, afterScreenUpdates: true)
-    //        return UIGraphicsGetImageFromCurrentImageContext()
-    //    }
 }
 
 //MARK:カメラ設定メソッド
@@ -413,10 +388,9 @@ extension ViewController{
         self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+
+        self.cameraPreviewLayer?.frame = self.cameraView.frame
         
-        //        self.cameraPreviewLayer?.frame = view.frame
-        //        self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
-        self.cameraPreviewLayer?.frame = cameraView.frame
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }
     

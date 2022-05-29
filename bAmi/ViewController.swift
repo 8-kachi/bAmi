@@ -61,15 +61,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var prevPinch:CGAffineTransform = CGAffineTransform()
     var prevRotate:CGAffineTransform = CGAffineTransform()
     
+    override func loadView() {
+        super.loadView()
+        print(self.view.frame.width)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupCaptureSession()
         setupDevice()
         setupInputOutput()
         setupPreviewLayer()
         captureSession.startRunning()
         // Do any additional setup after loading the view.
-        
+
         //panViewをパンジェスチャー（ドラッグ）で動かせるように
         let panGesture = UIPanGestureRecognizer()
         panGesture.addTarget(self, action: #selector(panAction(_:)))
@@ -88,12 +94,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         saveCameraViewButton.isHidden = true
         backGroundCancelButton.isHidden = true
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
+
     /// アルバムを開きます。
     /// - Parameter sender: Any
     @IBAction func toAlbumButton(_ sender: Any) {
@@ -173,7 +178,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             style: .default,
             handler: { [self](action: UIAlertAction) -> Void in
                 if self.cameraView.image != nil {
-                
                     toAlbumButton.isHidden = true
                     trashButton.isHidden = true
                     cameraButton.isHidden = true
@@ -189,28 +193,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         false,
                         0
                     )
-                self.view.drawHierarchy(
-                    in: CGRect(
-                        x: -cameraView.frame.origin.x,
-                        y: -cameraView.frame.origin.y,
-                        width: view.bounds.size.width,
-                        height: view.bounds.size.height
-                    ),
-                    afterScreenUpdates: true
-                )
-                
-                let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-                //コンテキストを閉じる
-                UIGraphicsEndImageContext()
-                // imageをカメラロールに保存
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                
+                    
+                    self.view.drawHierarchy(
+                        in: CGRect(
+                            x: -cameraView.frame.origin.x,
+                            y: -cameraView.frame.origin.y,
+                            width: view.bounds.size.width,
+                            height: view.bounds.size.height
+                        ),
+                        afterScreenUpdates: true
+                    )
+                    
+                    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+                    //コンテキストを閉じる
+                    UIGraphicsEndImageContext()
+                    // imageをカメラロールに保存
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
 
-                saveCameraViewButton.isHidden = false
-                backGroundCancelButton.isHidden = false
-                changeSlider.isHidden = false
+                    saveCameraViewButton.isHidden = false
+                    backGroundCancelButton.isHidden = false
+                    changeSlider.isHidden = false
+                }
             }
-        })
+        )
         let cancelButton = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
         // アラートにボタン追加
@@ -402,14 +407,23 @@ extension ViewController{
         self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-
-        self.cameraPreviewLayer?.frame = self.view.frame
-
-        // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
-        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
-//        self.cameraPreviewLayer?.videoGravity = .resize
-        
-        self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }
     
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//    }
+
+    func adjustPreviewLayer() {
+        self.cameraPreviewLayer?.frame = self.cameraView.frame
+        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.view.layer.insertSublayer(
+            self.cameraPreviewLayer!,
+            at: 0
+        )
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        adjustPreviewLayer()
+    }
 }

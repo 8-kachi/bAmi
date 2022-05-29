@@ -93,8 +93,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.didReceiveMemoryWarning()
     }
     
+    
+    /// アルバムを開きます。
+    /// - Parameter sender: Any
     @IBAction func toAlbumButton(_ sender: Any) {
-        //アルバムを開く処理を呼び出す
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.delegate = self
@@ -105,10 +107,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    
+    /// スライダーのイベントに反応して透明度を変更します。
+    /// - Parameters:
+    ///   - sender: Any
+    ///   - event: UIEvent
     @IBAction func changeSlider(_ sender: UISlider, forEvent event: UIEvent) {
         imageView.alpha = CGFloat(sender.value)
     }
     
+    
+    /// 撮影に戻るかどうかのアラートを表示します。
     func showbackGroundcancelAlert()  {
         let alert = UIAlertController(
             title: "撮影した背景画像を削除します",
@@ -144,12 +153,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // アラートの表示
         present(alert, animated: true, completion: nil)
     }
+
     
+    /// 撮影に戻るかどうかのアラートを表示させます。
+    /// - Parameter sender: Any
     @IBAction func backGroundCansel(_ sender: Any) {
         showbackGroundcancelAlert()
     }
     
-    // 重ねる画像と背景を一緒に保存する時に呼ばれる関数
+    /// 画像を保存するかどうかのアラートを表示します。
     func showSaveAlert() {
         let alert = UIAlertController(
             title: "画像を保存します",
@@ -209,11 +221,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(alert, animated: true, completion: nil)
     }
     
+    
+    /// 画像を保存するかどうかのアラートを呼び出します。
+    /// - Parameter sender: Any
     @IBAction func saveCameraView(_ sender: Any) {
         showSaveAlert()
     }
     
-    //ビューをドラッグする
+    /// オーバーレイ画像をドラッグできるようにします。
+    /// - Parameter sender: UIPanGestureRecognizer
     @IBAction func panAction(_ sender: UIPanGestureRecognizer) {
         // Viewをドラッグした量だけ動かす
         let point: CGPoint = sender.translation(in: self.imageView )
@@ -379,7 +395,7 @@ extension ViewController{
             print(error)
         }
     }
-    
+
     //カメラのプレビューを表示するレイヤの設定
     func setupPreviewLayer() {
         // 指定したAVCaptureSessionでプレビューレイヤを初期化
@@ -387,10 +403,11 @@ extension ViewController{
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
 
-        self.cameraPreviewLayer?.frame = self.cameraView.frame
+        self.cameraPreviewLayer?.frame = self.view.frame
+
         // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
-//        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
-        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
+//        self.cameraPreviewLayer?.videoGravity = .resize
         
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,24 +13,24 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="bAmi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-rf-VV8">
-                                <rect key="frame" x="0.0" y="172" width="414" height="552"/>
+                                <rect key="frame" x="0.0" y="0.5" width="1024" height="1365"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qcP-rf-VV8" secondAttribute="height" multiplier="3:4" id="du4-Vg-pvM"/>
                                 </constraints>
                             </imageView>
                             <slider opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nem-KI-Ipc">
-                                <rect key="frame" x="38" y="84" width="338" height="31"/>
+                                <rect key="frame" x="38" y="60" width="948" height="31"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
                                     <action selector="changeSlider:forEvent:" destination="BYZ-38-t0r" eventType="valueChanged" id="9WE-hZ-bhs"/>
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-cJ-4dy">
-                                <rect key="frame" x="120.5" y="800" width="24" height="22"/>
+                                <rect key="frame" x="425.5" y="1304" width="24" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="rectangle.slash" catalog="system"/>
                                 <connections>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-6P-vfz">
-                                <rect key="frame" x="46.5" y="800" width="24" height="22"/>
+                                <rect key="frame" x="351.5" y="1304" width="24" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="photo" catalog="system"/>
                                 <connections>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bA-9u-03Y">
-                                <rect key="frame" x="269.5" y="800" width="18.5" height="22"/>
+                                <rect key="frame" x="574.5" y="1304" width="18.5" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="checkmark" catalog="system"/>
                                 <connections>
@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-FH-c1t">
-                                <rect key="frame" x="194.5" y="800" width="25" height="22"/>
+                                <rect key="frame" x="499.5" y="1304" width="25" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="camera" catalog="system"/>
                                 <connections>
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-ez-NHW">
-                                <rect key="frame" x="338" y="800" width="18" height="22"/>
+                                <rect key="frame" x="643" y="1304" width="18" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" image="arrow.counterclockwise" catalog="system"/>
                                 <connections>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-02-82g">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <rect key="frame" x="412" y="583" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -88,6 +88,7 @@
                             <constraint firstItem="qcP-rf-VV8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7yJ-O4-mtf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nem-KI-Ipc" secondAttribute="trailing" constant="40" id="8LF-Jd-mFj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DXH-cJ-4dy" secondAttribute="bottom" constant="40" id="9IJ-lL-YjI"/>
+                            <constraint firstItem="nem-KI-Ipc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fvh-6E-cl8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OUo-6P-vfz" secondAttribute="bottom" constant="40" id="JAI-6S-2m9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yEr-ez-NHW" secondAttribute="bottom" constant="40" id="Mgf-n3-Dx7"/>
                             <constraint firstItem="qcP-rf-VV8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rhv-9b-Tgf"/>

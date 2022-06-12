@@ -333,8 +333,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //シャッターボタンが押された時のアクション
     @IBAction func cameraButton_TouchUpInside(_ sender: Any) {
         let settings = AVCapturePhotoSettings()
+
         //フラッシュの設定
-        settings.flashMode = .auto
+        // フラッシュはoff。iPad第4世代だとフラッシュ機能がデバイスにないのでoffにしてある。
+        settings.flashMode = .off
+
         //撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
         
@@ -372,7 +375,7 @@ extension ViewController{
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
         //プロパティの条件を満たしたカメラデバイスの取得
         let devices = deviceDiscoverySession.devices
-        
+
         for device in devices {
             if device.position == AVCaptureDevice.Position.back {
                 mainCamera = device
